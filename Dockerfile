@@ -30,18 +30,7 @@ RUN rpm --rebuilddb \
 		openssh-clients-5.3p1-118.1.el6_8 \
 		python-setuptools-0.6.10-3.el6 \
 		yum-plugin-versionlock-1.1.30-37.el6 \
-		wget
-#		 \
-#	&& yum versionlock add \
-#		vim-minimal \
-#		xz \
-#		sudo \
-#		openssh \
-#		openssh-server \
-#		openssh-clients \
-#		python-setuptools \
-#		yum-plugin-versionlock
-#		 \
+		wget \
 	&& rm -rf /var/cache/yum/* \
 	&& yum clean all \
 	&& /bin/find /usr/share \
