@@ -42,13 +42,13 @@ RUN rpm --rebuilddb \
 #		python-setuptools \
 #		yum-plugin-versionlock
 #		 \
-#	&& rm -rf /var/cache/yum/* \
-#	&& yum clean all \
-#	&& /bin/find /usr/share \
-#		-type f \
-#		-regextype posix-extended \
-#		-regex '.*\.(jpg|png)$' \
-#		-delete
+	&& rm -rf /var/cache/yum/* \
+	&& yum clean all \
+	&& /bin/find /usr/share \
+		-type f \
+		-regextype posix-extended \
+		-regex '.*\.(jpg|png)$' \
+		-delete
 
 # -----------------------------------------------------------------------------
 # download boostrap script
@@ -57,16 +57,31 @@ RUN rpm --rebuilddb \
 # -----------------------------------------------------------------------------
 
 RUN mkdir /root/scripts
-RUN cd /root/scripts \
-    && wget https://raw.githubusercontent.com/SugarFactory/cm-sf-infrastructure/master/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh?token=ABi-rz48zKeuHCWw7PgKe6-Gc3guvFlsks5YSqS0wA%3D%3D -O bootstrap_puppet_with_r10k_only_ruby2.3.sh -q
+
+ADD scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh \
+	/root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
 
 RUN bash /root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
 
-# fix removing package
-#RUN mkdir -p /usr/share/info && touch /usr/share/info/libffi.info.gz
-
 # removing devel packages
-RUN yum -q -y erase gcc-c++ readline-devel zlib-devel libxml2-devel libyaml-devel libxslt-devel openssl-devel augeas-devel cpp gcc
+RUN yum -q -y erase \
+	gcc-c++ \
+	readline-devel \
+	zlib-devel libxml2-devel \
+	libyaml-devel \
+	libxslt-devel \
+	openssl-devel \
+	augeas-devel \
+	cpp \
+	gcc \
+	&& rm -rf /var/cache/yum/* \
+	&& yum clean all \
+	&& /bin/find /usr/share \
+		-type f \
+		-regextype posix-extended \
+		-regex '.*\.(jpg|png)$' \
+		-delete
+
 # libffi-devel
 
 ADD puppet-fix/syck_node_monkeypatch.rb \
