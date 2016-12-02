@@ -30,6 +30,7 @@ RUN rpm --rebuilddb \
 		openssh-clients-5.3p1-118.1.el6_8 \
 		python-setuptools-0.6.10-3.el6 \
 		yum-plugin-versionlock-1.1.30-37.el6 \
+		wget \
 	&& yum versionlock add \
 		vim-minimal \
 		xz \
@@ -38,8 +39,29 @@ RUN rpm --rebuilddb \
 		openssh-server \
 		openssh-clients \
 		python-setuptools \
-		yum-plugin-versionlock \
-	&& rm -rf /var/cache/yum/* \
+		yum-plugin-versionlock
+#		 \
+#	&& rm -rf /var/cache/yum/* \
+#	&& yum clean all \
+#	&& /bin/find /usr/share \
+#		-type f \
+#		-regextype posix-extended \
+#		-regex '.*\.(jpg|png)$' \
+#		-delete
+
+# -----------------------------------------------------------------------------
+# install rvm, ruby and puppet
+# -----------------------------------------------------------------------------
+RUN mkdir /root/scripts
+RUN cd /root/scripts \
+    && wget https://raw.githubusercontent.com/SugarFactory/cm-sf-infrastructure/master/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh?token=ABi-rz48zKeuHCWw7PgKe6-Gc3guvFlsks5YSqS0wA%3D%3D -O bootstrap_puppet_with_r10k_only_ruby2.3.sh -q
+
+RUN bash /root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
+
+# -----------------------------------------------------------------------------
+# purge yum and rpm unused files
+# -----------------------------------------------------------------------------
+RUN rm -rf /var/cache/yum/* \
 	&& yum clean all \
 	&& /bin/find /usr/share \
 		-type f \
