@@ -30,14 +30,15 @@ RUN rpm --rebuilddb \
 		openssh-clients-5.3p1-118.1.el6_8 \
 		python-setuptools-0.6.10-3.el6 \
 		yum-plugin-versionlock-1.1.30-37.el6 \
-		wget \
-	&& rm -rf /var/cache/yum/* \
-	&& yum clean all \
-	&& /bin/find /usr/share \
-		-type f \
-		-regextype posix-extended \
-		-regex '.*\.(jpg|png)$' \
-		-delete
+		wget
+#		 \
+#	&& rm -rf /var/cache/yum/* \
+#	&& yum clean all \
+#	&& /bin/find /usr/share \
+#		-type f \
+#		-regextype posix-extended \
+#		-regex '.*\.(jpg|png)$' \
+#		-delete
 
 # -----------------------------------------------------------------------------
 # copy bootsrap script
@@ -52,23 +53,24 @@ ADD scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh \
 RUN bash /root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
 
 # removing devel packages
-RUN yum -q -y erase \
-	gcc-c++ \
-	readline-devel \
-	zlib-devel libxml2-devel \
-	libyaml-devel \
-	libxslt-devel \
-	openssl-devel \
-	augeas-devel \
-	cpp \
-	gcc \
-	&& rm -rf /var/cache/yum/* \
-	&& yum clean all \
-	&& /bin/find /usr/share \
-		-type f \
-		-regextype posix-extended \
-		-regex '.*\.(jpg|png)$' \
-		-delete
+#RUN rpm --rebuilddb \
+#     && yum -q -y erase \
+#	gcc-c++ \
+#	readline-devel \
+#	zlib-devel libxml2-devel \
+#	libyaml-devel \
+#	libxslt-devel \
+#	openssl-devel \
+#	augeas-devel \
+#	cpp \
+#	gcc \
+#	&& rm -rf /var/cache/yum/* \
+#	&& yum clean all \
+#	&& /bin/find /usr/share \
+#		-type f \
+#		-regextype posix-extended \
+#		-regex '.*\.(jpg|png)$' \
+#		-delete
 
 # libffi-devel
 
@@ -83,12 +85,13 @@ RUN bash -c 'source /etc/bashrc; puppet module list'
 # purge yum and rpm unused files
 # -----------------------------------------------------------------------------
 RUN rm -rf /var/cache/yum/* \
-	&& yum clean all \
-	&& /bin/find /usr/share \
-		-type f \
-		-regextype posix-extended \
-		-regex '.*\.(jpg|png)$' \
-		-delete
+	&& yum clean all
+#	 \
+#	&& /bin/find /usr/share \
+#		-type f \
+#		-regextype posix-extended \
+#		-regex '.*\.(jpg|png)$' \
+#		-delete
 
 # -----------------------------------------------------------------------------
 # Install supervisord (required to run more than a single process in a container)

@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Update our package manager...
-yum update -y -q --exclude=kernel
+yum update -y -q --exclude=util-linux-ng --exclude=libblkid --exclude=libuuid
 # Install dependencies for RVM and Ruby...
-yum -q -y install \
+rpm --rebuilddb \
+  && yum -q -y install \
 	gcc-c++ \
 	patch \
 	readline-devel \
@@ -19,14 +20,15 @@ yum -q -y install \
 	bison \
 	git \
 	augeas-devel \
-	sqlite-devel \
-	&& rm -rf /var/cache/yum/* \
-	&& yum clean all \
-	&& /bin/find /usr/share \
-	    -type f \
-	    -regextype posix-extended \
-	    -regex '.*\.(jpg|png)$' \
-	    -delete
+	sqlite-devel
+#	 \
+#	&& rm -rf /var/cache/yum/* \
+#	&& yum clean all \
+#	&& /bin/find /usr/share \
+#	    -type f \
+#	    -regextype posix-extended \
+#	    -regex '.*\.(jpg|png)$' \
+#	    -delete
 
 # import signing key
 gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
