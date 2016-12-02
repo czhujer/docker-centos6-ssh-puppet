@@ -40,11 +40,10 @@ RUN rpm --rebuilddb \
 		-delete
 
 # -----------------------------------------------------------------------------
-# download boostrap script
+# copy bootsrap script
 # install rvm, ruby and puppet gems
 # fix puppet
 # -----------------------------------------------------------------------------
-
 RUN mkdir /root/scripts
 
 ADD scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh \
