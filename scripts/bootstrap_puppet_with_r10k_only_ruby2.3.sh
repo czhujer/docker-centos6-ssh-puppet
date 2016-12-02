@@ -13,23 +13,20 @@ $sudo yum update -y -q
 $sudo yum -q -y install \
 	gcc-c++ \
 	patch \
-	readline \
 	readline-devel \
-	zlib \
 	zlib-devel \
 	libxml2-devel \
 	libyaml-devel \
 	libxslt-devel \
 	libffi-devel \
 	openssl-devel \
-	make \
-	bzip2 \
 	autoconf \
 	automake \
 	libtool \
 	bison \
 	git \
 	augeas-devel \
+	sqlite-devel \
 	&& rm -rf /var/cache/yum/* \
 	&& yum clean all \
 	&& /bin/find /usr/share \
@@ -59,17 +56,18 @@ $sudo rvm alias create default ruby-2.3.2
 $sudo source /etc/profile.d/rvm.sh
 
 # Update rubygems, and pull down facter and then puppet...
-$sudo rvm 2.3.2 do gem update --system
-$sudo rvm 2.3.2 do gem install json_pure -v1.8.3 --no-ri --no-rdoc
-$sudo rvm 2.3.2 do gem install facter --no-ri --no-rdoc
-$sudo rvm 2.3.2 do gem install puppet --no-ri --no-rdoc -v3.8.7
-$sudo rvm 2.3.2 do gem install libshadow --no-ri --no-rdoc
-$sudo rvm 2.3.2 do gem install puppet-module --no-ri --no-rdoc
-$sudo rvm 2.3.2 do gem install ruby-augeas --no-ri --no-rdoc
-$sudo rvm 2.3.2 do gem install syck --no-ri --no-rdoc
+#$sudo rvm 2.3.2 do gem update --system --no-ri --no-rdoc
+$sudo rvm 2.3.2 do gem install rubygems-update --silent --no-ri --no-rdoc
+$sudo rvm 2.3.2 do gem install json_pure -v1.8.3 --silent --no-ri --no-rdoc
+$sudo rvm 2.3.2 do gem install facter --silent --no-ri --no-rdoc
+$sudo rvm 2.3.2 do gem install puppet --silent --no-ri --no-rdoc -v3.8.7
+$sudo rvm 2.3.2 do gem install libshadow --silent --no-ri --no-rdoc
+$sudo rvm 2.3.2 do gem install puppet-module --silent --no-ri --no-rdoc
+$sudo rvm 2.3.2 do gem install ruby-augeas --silent --no-ri --no-rdoc
+$sudo rvm 2.3.2 do gem install syck --no-ri --silent --no-rdoc
 
 # install r10k
-$sudo rvm 2.3.2 do gem install --no-rdoc --no-ri r10k
+$sudo rvm 2.3.2 do gem install --no-rdoc --no-ri r10k --silent
 
 # Create necessary Puppet directories...
 $sudo mkdir -p /etc/puppet /var/lib /var/log /var/run /etc/puppet/manifests /etc/puppet/modules /etc/puppet/hieradata
