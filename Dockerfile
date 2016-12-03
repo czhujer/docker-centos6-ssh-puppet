@@ -85,7 +85,8 @@ RUN bash -c 'source /etc/bashrc; puppet module list'
 # purge yum and rpm unused files
 # -----------------------------------------------------------------------------
 RUN rm -rf /var/cache/yum/* \
-	&& yum clean all
+	&& yum clean all \
+	&& && rm -rf /usr/local/rvm/src/ruby-2.3.2/*
 #	 \
 #	&& /bin/find /usr/share \
 #		-type f \
