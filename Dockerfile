@@ -50,7 +50,7 @@ ADD scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh \
 RUN bash /root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
 
 ADD puppet-fix/syck_node_monkeypatch.rb \
-	/usr/local/rvm/gems/ruby-2.3.2/gems/puppet-3.8.7/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb
+	/usr/local/rvm/gems/ruby-2.3.3/gems/puppet-3.8.7/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb
 
 RUN bash -c 'source /etc/bashrc; gem environment |egrep "install|update"'
 
