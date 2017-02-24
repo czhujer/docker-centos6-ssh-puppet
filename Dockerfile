@@ -22,23 +22,20 @@ RUN rpm --import \
 RUN rpm --rebuilddb \
 	&& yum -q -y install \
 		epel-release \
-		vim-minimal-7.4.629-5.el6 \
-		xz-4.999.9-0.5.beta.20091007git.el6.x86_64 \
-		sudo-1.8.6p3-24.el6 \
-		openssh-5.3p1-118.1.el6_8 \
-		openssh-server-5.3p1-118.1.el6_8 \
-		openssh-clients-5.3p1-118.1.el6_8 \
-		python-setuptools-0.6.10-3.el6 \
-		yum-plugin-versionlock-1.1.30-37.el6 \
+		vim-minimal \
+		xz \
+		sudo \
+		openssh \
+		openssh-server \
+		openssh-clients \
+		python-setuptools \
+		yum-plugin-versionlock \
 		wget
-#		 \
-#	&& rm -rf /var/cache/yum/* \
-#	&& yum clean all \
-#	&& /bin/find /usr/share \
-#		-type f \
-#		-regextype posix-extended \
-#		-regex '.*\.(jpg|png)$' \
-#		-delete
+
+# -----------------------------------------------------------------------------
+# Update packages
+# -----------------------------------------------------------------------------
+RUN yum update -y
 
 # -----------------------------------------------------------------------------
 # copy bootsrap script
@@ -51,28 +48,6 @@ ADD scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh \
 	/root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
 
 RUN bash /root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
-
-# removing devel packages
-#RUN rpm --rebuilddb \
-#     && yum -q -y erase \
-#	gcc-c++ \
-#	readline-devel \
-#	zlib-devel libxml2-devel \
-#	libyaml-devel \
-#	libxslt-devel \
-#	openssl-devel \
-#	augeas-devel \
-#	cpp \
-#	gcc \
-#	&& rm -rf /var/cache/yum/* \
-#	&& yum clean all \
-#	&& /bin/find /usr/share \
-#		-type f \
-#		-regextype posix-extended \
-#		-regex '.*\.(jpg|png)$' \
-#		-delete
-
-# libffi-devel
 
 ADD puppet-fix/syck_node_monkeypatch.rb \
 	/usr/local/rvm/gems/ruby-2.3.2/gems/puppet-3.8.7/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb
@@ -87,12 +62,6 @@ RUN bash -c 'source /etc/bashrc; puppet module list'
 RUN rm -rf /var/cache/yum/* \
 	&& yum clean all \
 	&& && rm -rf /usr/local/rvm/src/ruby-2.3.2/*
-#	 \
-#	&& /bin/find /usr/share \
-#		-type f \
-#		-regextype posix-extended \
-#		-regex '.*\.(jpg|png)$' \
-#		-delete
 
 # -----------------------------------------------------------------------------
 # Install supervisord (required to run more than a single process in a container)
@@ -238,4 +207,5 @@ jdeathe/centos-ssh:centos-6-${RELEASE_VERSION} \
 	org.deathe.description="CentOS-6 6.8 x86_64 - SCL, EPEL and IUS Repositories / Supervisor / OpenSSH."
 
 CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"]
+
 
