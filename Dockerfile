@@ -61,7 +61,7 @@ RUN bash -c 'source /etc/bashrc; puppet module list'
 # -----------------------------------------------------------------------------
 RUN rm -rf /var/cache/yum/* \
 	&& yum clean all \
-	&& && rm -rf /usr/local/rvm/src/ruby-2.3.2/*
+	&& && rm -rf /usr/local/rvm/src/ruby-2.3.3/*
 
 # -----------------------------------------------------------------------------
 # Install supervisord (required to run more than a single process in a container)
