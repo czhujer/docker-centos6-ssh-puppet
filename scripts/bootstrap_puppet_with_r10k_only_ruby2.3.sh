@@ -45,23 +45,23 @@ $sudo source /etc/profile.d/rvm.sh
 #$sudo rvm install ruby-1.9
 #$sudo rvm alias create default 1.9
 
-$sudo rvm install ruby-2.3.3
-$sudo rvm alias create default ruby-2.3.3
+$sudo rvm install ruby-2.3.4
+$sudo rvm alias create default ruby-2.3.4
 
 $sudo source /etc/profile.d/rvm.sh
 
 # Update rubygems, and pull down facter and then puppet...
-$sudo rvm 2.3.3 do gem update --system
-$sudo rvm 2.3.3 do gem install json_pure -v1.8.3 --no-ri --no-rdoc
-$sudo rvm 2.3.3 do gem install facter --no-ri --no-rdoc
-$sudo rvm 2.3.3 do gem install puppet --no-ri --no-rdoc -v3.8.7
-$sudo rvm 2.3.3 do gem install libshadow --no-ri --no-rdoc
-$sudo rvm 2.3.3 do gem install puppet-module --no-ri --no-rdoc
-$sudo rvm 2.3.3 do gem install ruby-augeas --no-ri --no-rdoc
-$sudo rvm 2.3.3 do gem install syck --no-ri --no-rdoc
+$sudo rvm 2.3.4 do gem update --system
+$sudo rvm 2.3.4 do gem install json_pure -v1.8.3 --no-ri --no-rdoc
+$sudo rvm 2.3.4 do gem install facter --no-ri --no-rdoc
+$sudo rvm 2.3.4 do gem install puppet --no-ri --no-rdoc -v3.8.7
+$sudo rvm 2.3.4 do gem install libshadow --no-ri --no-rdoc
+$sudo rvm 2.3.4 do gem install puppet-module --no-ri --no-rdoc
+$sudo rvm 2.3.4 do gem install ruby-augeas --no-ri --no-rdoc
+$sudo rvm 2.3.4 do gem install syck --no-ri --no-rdoc
 
 # install r10k
-$sudo rvm 2.3.3 do gem install --no-rdoc --no-ri r10k
+$sudo rvm 2.3.4 do gem install --no-rdoc --no-ri r10k
 
 # Create necessary Puppet directories...
 $sudo mkdir -p /etc/puppet /var/lib /var/log /var/run /etc/puppet/manifests /etc/puppet/modules /etc/puppet/hieradata
