@@ -63,6 +63,9 @@ $sudo rvm 2.3.4 do gem install syck --no-ri --no-rdoc
 # install r10k
 $sudo rvm 2.3.4 do gem install --no-rdoc --no-ri r10k
 
+#fix puppet
+$sudo sed -e 's/  Syck.module_eval monkeypatch/  #Syck.module_eval monkeypatch/' -i /usr/local/rvm/gems/ruby-2.3.4/gems/puppet-3.8.7/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb
+
 # Create necessary Puppet directories...
 $sudo mkdir -p /etc/puppet /var/lib /var/log /var/run /etc/puppet/manifests /etc/puppet/modules /etc/puppet/hieradata
 
