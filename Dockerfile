@@ -1,10 +1,10 @@
 # =============================================================================
 # jdeathe/centos-ssh
 #
-# CentOS-6 6.8 x86_64 - SCL/EPEL/IUS Repos. / Supervisor / OpenSSH.
+# CentOS-6 6.x x86_64 - SCL/EPEL/IUS Repos. / Supervisor / OpenSSH.
 # 
 # =============================================================================
-FROM centos:centos6.8
+FROM centos:centos6
 
 MAINTAINER James Deathe <james.deathe@gmail.com>
 
@@ -204,7 +204,7 @@ jdeathe/centos-ssh:centos-6-${RELEASE_VERSION} \
 	org.deathe.license="MIT" \
 	org.deathe.vendor="jdeathe" \
 	org.deathe.url="https://github.com/jdeathe/centos-ssh" \
-	org.deathe.description="CentOS-6 6.8 x86_64 - SCL, EPEL and IUS Repositories / Supervisor / OpenSSH."
+	org.deathe.description="CentOS-6 6.x x86_64 - SCL, EPEL and IUS Repositories / Supervisor / OpenSSH."
 
 CMD ["/usr/bin/supervisord", "--configuration=/etc/supervisord.conf"]
 
