@@ -44,10 +44,10 @@ RUN yum update -y
 # -----------------------------------------------------------------------------
 RUN mkdir /root/scripts
 
-ADD scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh \
-	/root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
+ADD scripts/bootstrap_puppet_with_r10k_only_ruby2.4.sh \
+	/root/scripts/bootstrap_puppet_with_r10k_only_ruby2.4.sh
 
-RUN bash /root/scripts/bootstrap_puppet_with_r10k_only_ruby2.3.sh
+RUN bash /root/scripts/bootstrap_puppet_with_r10k_only_ruby2.4.sh
 
 #ADD puppet-fix/syck_node_monkeypatch.rb \
 #	/usr/local/rvm/gems/ruby-2.3.3/gems/puppet-3.8.7/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb
@@ -61,7 +61,7 @@ RUN bash -c 'source /etc/bashrc; puppet module list'
 # -----------------------------------------------------------------------------
 RUN rm -rf /var/cache/yum/* \
 	&& yum clean all \
-	&& rm -rf /usr/local/rvm/src/ruby-2.3.3/*
+	&& rm -rf /usr/local/rvm/src/ruby-2.4.3/*
 
 # -----------------------------------------------------------------------------
 # Install supervisord (required to run more than a single process in a container)
